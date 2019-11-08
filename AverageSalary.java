@@ -56,19 +56,5 @@ public class AverageSalary{
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
 		job.waitForCompletion(true);
-// 		Configuration conf = new Configuration();
-// Job job=new Job(conf,"averagesal");
-// job.setJar("averagesalary.jar");
-// job.setJarByClass(AverageSalary.class);
-// job.setMapperClass(Map.class);
-// job.setCombinerClass(Reduce.class);
-// job.setReducerClass(Reduce.class);
-// job.setOutputKeyClass(Text.class);
-// job.setOutputValueClass(DoubleWritable.class);
-// Path p=new Path(args[0]);
-// Path p1=new Path(args[1]);
-// FileInputFormat.addInputPath(job,p);
-// FileOutputFormat.setOutputPath(job,p1);
-// job.waitForCompletion(true);
 	}
 }

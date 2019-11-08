@@ -11,12 +11,12 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class AverageSalary{
-	public static class Map extends Mapper<LongWritable, Text, Text, DoubleWritable>{
+	public static class Map extends Mapper<Object, Text, Text, DoubleWritable>{
 		private Text id = new Text();
 		private DoubleWritable salary = new DoubleWritable();
 
 		@Override
-		public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException{
+		public void map(Object key, Text value, Context context) throws IOException, InterruptedException{
 			String line = value.toString();
 			String val[] = line.split(" ");
 			id.set(val[0]);

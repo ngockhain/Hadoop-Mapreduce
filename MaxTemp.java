@@ -22,7 +22,7 @@ public class MaxTemp{
 		@Override
 		public void map(LongWritable key, Text value, Context context){
 			String line = value.toString();
-			StringTokenizer tokenizer = StringTokenizer(line, " ");
+			StringTokenizer tokenizer = new StringTokenizer(line, " ");
 			while(tokenizer.hasMoreTokens())
 			{
 				String year = tokenizer.nextToken();
@@ -42,7 +42,7 @@ public class MaxTemp{
 		public void reduce(Text key, Iterable<IntWritable> values, Context context){
 			int maxTemp = -9999;
 			for(IntWritable x: values){
-				if(maxTemp < x)
+				if(maxTemp < x.get())
 					maxTemp = x;
 			}
 			context.write(key, new IntWritable(maxTemp));
@@ -61,8 +61,8 @@ public class MaxTemp{
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
 
-		job.setMapperOutputKeyClass(Text.class);
-		job.setMapperOutputValueClass(IntWritable.class);
+		job.setMapOutputKeyClass(Text.class);
+		job.setMapOutputValueClass(IntWritable.class);
 
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);

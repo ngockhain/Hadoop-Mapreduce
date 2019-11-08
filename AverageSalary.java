@@ -27,7 +27,7 @@ public class AverageSalary{
 	}
 
 	public static class Reduce extends Reducer<Text, DoubleWritable, Text, DoubleWritable>{
-
+		@Override
 		public void reduce(Text key, Iterable<DoubleWritable> values, Context context) throws IOException, InterruptedException{
 			double cnt = 0, sum = 0;
 			for(DoubleWritable x: values)
@@ -47,7 +47,6 @@ public class AverageSalary{
 
 		job.setJarByClass(AverageSalary.class);
 		job.setMapperClass(Map.class);
-		job.setCombinerClass(Reduce.class);
 		job.setReducerClass(Reduce.class);
 
 		job.setOutputKeyClass(Text.class);

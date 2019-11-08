@@ -36,14 +36,15 @@ public class MaxTemp{
 	}
 
 
-	public static class Reduce extends Reduced<Text, IntWritable, Text, IntWritable>{
+	public static class Reduce extends Reducer<Text, IntWritable, Text, IntWritable>{
 
 		@Override
 		public void reduce(Text key, Iterable<IntWritable> values, Context context){
 			int maxTemp = -9999;
 			for(IntWritable x: values){
-				if(maxTemp < x.get())
-					maxTemp = x;
+				int temp = x.get();
+				if(maxTemp < temp)
+					maxTemp = temp;
 			}
 			context.write(key, new IntWritable(maxTemp));
 		}

@@ -45,6 +45,7 @@ public class AverageSalary{
 
 		job.setJar("averagesalary.jar");
 
+		job.setJarByClass(AverageSalary.class);
 		job.setMapperClass(Map.class);
 		job.setReducerClass(Reduce.class);
 

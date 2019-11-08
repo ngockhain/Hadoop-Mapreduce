@@ -46,7 +46,7 @@ public class HotColdDay {
         	if (day != ""){
         		Text dayText = new Text();
         		dayText.set(day);      	
-            		context.write(date, dayText);
+            	context.write(date, dayText);
  			}
         } 
     } 

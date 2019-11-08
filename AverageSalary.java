@@ -11,12 +11,12 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class AverageSalary{
-	public static class Map extends Mapper<Object, Text, Text, DoubleWritable>{
+	public static class Map extends Mapper<LongWritable, Text, Text, DoubleWritable>{
 		private Text id = new Text();
 		private DoubleWritable salary = new DoubleWritable();
 
 		@Override
-		public void map(Object key, Text value, Context context) throws IOException, InterruptedException{
+		public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException{
 			String line = value.toString();
 			String val[] = line.split(" ");
 			id.set(val[0]);
@@ -40,27 +40,41 @@ public class AverageSalary{
 	}
 
 	public static void main(String[] args) throws Exception{
+		// Configuration conf = new Configuration();
+		// Job job = new Job(conf, "AverageSalary");
+
+		// job.setJar("averagesalary.jar");
+
+		// job.setJarByClass(AverageSalary.class);
+		// job.setMapperClass(Map.class);
+		// job.setReducerClass(Reduce.class);
+
+		// job.setOutputKeyClass(Text.class);
+		// job.setOutputValueClass(DoubleWritable.class);
+
+		// job.setMapOutputKeyClass(Text.class);
+		// job.setMapOutputValueClass(DoubleWritable.class);
+
+		// job.setInputFormatClass(FileInputFormat.class);
+		// job.setOutputFormatClass(FileOutputFormat.class);
+
+		// FileInputFormat.addInputPath(job, new Path(args[0]));
+		// FileOutputFormat.setOutputPath(job, new Path(args[1]));
+
+		// job.waitForCompletion(true);
 		Configuration conf = new Configuration();
-		Job job = new Job(conf, "AverageSalary");
-
-		job.setJar("averagesalary.jar");
-
-		job.setJarByClass(AverageSalary.class);
-		job.setMapperClass(Map.class);
-		job.setReducerClass(Reduce.class);
-
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(DoubleWritable.class);
-
-		job.setMapOutputKeyClass(Text.class);
-		job.setMapOutputValueClass(DoubleWritable.class);
-
-		job.setInputFormatClass(FileInputFormat.class);
-		job.setOutputFormatClass(FileOutputFormat.class);
-
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
-
-		job.waitForCompletion(true);
+Job job=new Job(conf,"averagesal");
+job.setJar("averagesalary.jar");
+job.setJarByClass(AverageSalary.class);
+job.setMapperClass(Map.class);
+job.setCombinerClass(Reduce.class);
+job.setReducerClass(Reduce.class);
+job.setOutputKeyClass(Text.class);
+job.setOutputValueClass(DoubleWritable.class);
+Path p=new Path(args[0]);
+Path p1=new Path(args[1]);
+FileInputFormat.addInputPath(job,p);
+FileOutputFormat.setOutputPath(job,p1);
+job.waitForCompletion(true);
 	}
 }

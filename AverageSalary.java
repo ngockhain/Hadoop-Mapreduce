@@ -54,11 +54,11 @@ public class AverageSalary{
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(DoubleWritable.class);
 
-		job.setFormatInputClass(FileInputFormat.class);
-		job.setFormatOutputClass(FileOutputFormat.class);
+		job.setInputFormatClass(FileInputFormat.class);
+		job.setOutputFormatClass(FileOutputFormat.class);
 
 		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(atgs[1]));
+		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
 		job.waitForCompletion(true);
 	}

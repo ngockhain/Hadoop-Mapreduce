@@ -72,9 +72,9 @@ public class HotColdDay {
 		
 		job.setNumReduceTasks(0);
 		
-       		Path outputPath = new Path(args[1]);
+       	Path outputPath = new Path(args[1]);
         
-        	FileInputFormat.addInputPath(job, new Path(args[0]));
+    	FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 		
 		job.waitForCompletion(true);

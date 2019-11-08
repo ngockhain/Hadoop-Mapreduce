@@ -30,7 +30,7 @@ public class MaxTemp{
 
 				k.set(year);
 				int val = Integer.parseInt(temp);
-				context.write(k, new IntWritable(v));
+				context.write(k, new IntWritable(val));
 			}
 		}
 	}

@@ -20,7 +20,7 @@ public class MaxTemp{
 		Text k = new Text();
 
 		@Override
-		public void map(LongWritable key, Text value, Context context){
+		public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException{
 			String line = value.toString();
 			StringTokenizer tokenizer = new StringTokenizer(line, " ");
 			while(tokenizer.hasMoreTokens())
@@ -39,7 +39,7 @@ public class MaxTemp{
 	public static class Reduce extends Reducer<Text, IntWritable, Text, IntWritable>{
 
 		@Override
-		public void reduce(Text key, Iterable<IntWritable> values, Context context){
+		public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException{
 			int maxTemp = -9999;
 			for(IntWritable x: values){
 				int temp = x.get();
@@ -50,7 +50,7 @@ public class MaxTemp{
 		}
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args) throws Exception{
 		Configuration conf = new Configuration();
 		Job job = new Job(conf, "Max Temperature");
 

@@ -47,6 +47,7 @@ public class AverageSalary{
 
 		job.setJarByClass(AverageSalary.class);
 		job.setMapperClass(Map.class);
+		job.setCombinerClass(Reduce.class);
 		job.setReducerClass(Reduce.class);
 
 		job.setOutputKeyClass(Text.class);
